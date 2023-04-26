@@ -1,5 +1,5 @@
-import { App, IApp } from './components/app/app';
+import App from './components/app/app';
 import './global.css';
 
-const app: IApp = new App();
+const app = new App();
 app.start();
