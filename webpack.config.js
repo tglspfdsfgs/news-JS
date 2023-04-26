@@ -22,6 +22,9 @@ const baseConfig = {
     },
     resolve: {
         extensions: ['.js', '.ts'],
+        alias: {
+            '@interfaces': path.resolve(__dirname, 'src/interfaces.ts'),
+        },
     },
     output: {
         filename: 'index.js',
