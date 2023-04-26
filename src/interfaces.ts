@@ -1,3 +1,9 @@
+export enum Endpoints {
+    All = 'everything',
+    Top = 'top-headlines',
+    Sources = 'sources ',
+}
+
 export type Source = Readonly<{
     id: string;
     name: string;
