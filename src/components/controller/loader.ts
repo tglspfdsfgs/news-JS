@@ -1,4 +1,4 @@
-import { ResponseCallback, ResObject } from '@interfaces';
+import { ResponseCallback, ResObject, Endpoints } from '@interfaces';
 
 interface APIOptions {
     [key: string]: string;
@@ -17,7 +17,7 @@ class Loader {
     }
 
     getResp(
-        { endpoint, options = {} }: { endpoint: string; options?: APIOptions },
+        { endpoint, options = {} }: { endpoint: Endpoints; options?: APIOptions },
         callback: ResponseCallback = () => {
             console.error('No callback for response');
         }
