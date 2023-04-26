@@ -1,7 +1,7 @@
 export enum Endpoints {
     All = 'everything',
     Top = 'top-headlines',
-    Sources = 'sources ',
+    Sources = 'sources',
 }
 
 export type Source = Readonly<{
