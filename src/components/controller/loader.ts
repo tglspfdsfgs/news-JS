@@ -35,7 +35,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: APIOptions, endpoint: string): string {
+    private makeUrl(options: APIOptions, endpoint: string): string {
         const urlOptions: ReqOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -46,7 +46,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: 'GET' | 'SET', endpoint: string, callback: ResponseCallback, options: APIOptions = {}): void {
+    private load(method: 'GET' | 'SET', endpoint: string, callback: ResponseCallback, options: APIOptions = {}): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
