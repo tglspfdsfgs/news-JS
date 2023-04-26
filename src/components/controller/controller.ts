@@ -1,37 +1,43 @@
 import AppLoader from './appLoader';
+import { ResponseCallback, Endpoints } from '@interfaces';
 
 class AppController extends AppLoader {
-    getSources(callback) {
+    getSources(callback: ResponseCallback) {
         super.getResp(
             {
-                endpoint: 'sources',
+                endpoint: Endpoints.Sources,
             },
             callback
         );
     }
 
-    getNews(e, callback) {
-        let target = e.target;
-        const newsContainer = e.currentTarget;
+    getNews(e: Event, callback: ResponseCallback) {
+        if (e.target instanceof Element && e.currentTarget instanceof Element) {
+            let target: Element = e.target;
+            const newsContainer: Element = e.currentTarget;
 
-        while (target !== newsContainer) {
-            if (target.classList.contains('source__item')) {
-                const sourceId = target.getAttribute('data-source-id');
-                if (newsContainer.getAttribute('data-source') !== sourceId) {
-                    newsContainer.setAttribute('data-source', sourceId);
-                    super.getResp(
-                        {
-                            endpoint: 'everything',
-                            options: {
-                                sources: sourceId,
+            while (target !== newsContainer) {
+                if (target?.classList.contains('source__item')) {
+                    const sourceId = target.getAttribute('data-source-id');
+
+                    if (newsContainer.getAttribute('data-source') !== sourceId && typeof sourceId === 'string') {
+                        newsContainer.setAttribute('data-source', sourceId);
+                        super.getResp(
+                            {
+                                endpoint: Endpoints.All,
+                                options: {
+                                    sources: sourceId,
+                                },
                             },
-                        },
-                        callback
-                    );
+                            callback
+                        );
+                    }
+                    return;
                 }
-                return;
+                if (target.parentNode instanceof Element) {
+                    target = target.parentNode;
+                }
             }
-            target = target.parentNode;
         }
     }
 }
